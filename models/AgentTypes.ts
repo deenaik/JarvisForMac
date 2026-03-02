@@ -33,3 +33,14 @@ export interface AgentResponse {
   steps: AgentStep[];
   totalSteps: number;
 }
+
+export type ProgressEventType = 'tool_start' | 'tool_result';
+
+export interface ProgressEvent {
+  type: ProgressEventType;
+  toolName: string;
+  step: number;
+  success?: boolean;
+}
+
+export type ProgressCallback = (event: ProgressEvent) => void;

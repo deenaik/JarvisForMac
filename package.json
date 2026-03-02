@@ -6,7 +6,8 @@
   "main": "jarvis.ts",
   "scripts": {
     "start": "npx tsx jarvis.ts",
-    "start:voice": "npx tsx jarvis.ts --voice"
+    "start:voice": "npx tsx jarvis.ts --voice",
+    "start:server": "npx tsx jarvis-server.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.6.2",

@@ -26,3 +26,9 @@ Thumbs.db
 # Claude Code (keep skills, ignore session data)
 .claude/*
 !.claude/skills/
+
+# Xcode
+JarvisApp/build/
+JarvisApp/DerivedData/
+*.xcuserdata
+*.xcworkspace/xcuserdata/

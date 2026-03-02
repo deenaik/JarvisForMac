@@ -4,7 +4,7 @@ import { conversationManager } from './conversation-manager.js';
 import { MAX_AGENT_STEPS } from '../config/jarvis.js';
 import { getModelForTask } from '../config/openrouter.js';
 import type { OpenRouterMessage, OpenRouterToolCall } from '../models/OpenRouterTypes.js';
-import type { AgentStep, AgentResponse, ToolCall, ToolResult } from '../models/AgentTypes.js';
+import type { AgentStep, AgentResponse, ToolCall, ToolResult, ProgressCallback } from '../models/AgentTypes.js';
 
 /**
  * Core ReAct agent loop:
@@ -12,7 +12,7 @@ import type { AgentStep, AgentResponse, ToolCall, ToolResult } from '../models/A
  *   2. If LLM returns tool_calls -> execute tools -> add results -> loop
  *   3. If LLM returns text (no tool_calls) -> return response (done)
  */
-export async function runAgentLoop(userMessage: string): Promise<AgentResponse> {
+export async function runAgentLoop(userMessage: string, onProgress?: ProgressCallback): Promise<AgentResponse> {
   // Add user message to conversation
   conversationManager.addMessage({ role: 'user', content: userMessage });
 
@@ -60,7 +60,7 @@ export async function runAgentLoop(userMessage: string): Promise<AgentResponse> 
     }
 
     // Execute tool calls
-    const step = await executeToolCalls(stepCount, toolCalls);
+    const step = await executeToolCalls(stepCount, toolCalls, onProgress);
     steps.push(step);
 
     // Add tool results to conversation
@@ -89,7 +89,8 @@ export async function runAgentLoop(userMessage: string): Promise<AgentResponse> 
 
 async function executeToolCalls(
   stepNumber: number,
-  toolCalls: OpenRouterToolCall[]
+  toolCalls: OpenRouterToolCall[],
+  onProgress?: ProgressCallback
 ): Promise<AgentStep> {
   const parsedCalls: ToolCall[] = [];
   const results: ToolResult[] = [];
@@ -109,6 +110,8 @@ async function executeToolCalls(
     };
     parsedCalls.push(call);
 
+    onProgress?.({ type: 'tool_start', toolName: tc.function.name, step: stepNumber });
+
     const { output, isError } = await toolRegistry.execute(tc.function.name, args);
     results.push({
       toolCallId: tc.id,
@@ -116,6 +119,8 @@ async function executeToolCalls(
       output,
       isError,
     });
+
+    onProgress?.({ type: 'tool_result', toolName: tc.function.name, step: stepNumber, success: !isError });
   }
 
   return {
