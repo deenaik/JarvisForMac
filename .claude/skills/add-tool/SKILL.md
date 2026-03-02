@@ -23,9 +23,9 @@ Description: $ARGUMENTS
    - Define `parameters` as a JSON Schema object with `type`, `description`, and `required`
    - The `execute` method must return `Promise<string>` — never throw, return error strings instead
    - Import config values from `config/jarvis.js` if you need `TOOL_TIMEOUT_MS`
-4. **Register the tool** in `jarvis.ts`:
-   - Add the import: `import { myTool } from './tools/$0.js'`
-   - Add `toolRegistry.register(myTool)` inside `registerTools()`
+4. **Register the tool in BOTH entry points**:
+   - `jarvis.ts`: Add import + `toolRegistry.register(myTool)` inside `registerTools()`
+   - `jarvis-server.ts`: Add the same import + register (this file has its own `registerTools()`)
 5. **Verify** by running `echo "quit" | npx tsx jarvis.ts` to confirm it compiles and the tool appears in the loaded tools list
 
 ## Conventions
@@ -36,3 +36,4 @@ Description: $ARGUMENTS
 - Import paths always use `.js` extension (tsx resolves to `.ts` at runtime)
 - Use `execFile` from `node:child_process` for subprocess tools (not `exec`) for safety
 - Respect `TOOL_TIMEOUT_MS` (30s) from `config/jarvis.js` for any subprocess calls
+- **Dual registration is required** — tools must be in both `jarvis.ts` and `jarvis-server.ts` or the native app won't have access to them

@@ -18,8 +18,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 - **Phase 2**: MCP client (`@modelcontextprotocol/sdk`), Claude Code CLI (`tools/claude-code.ts`), Chrome browser (`tools/browser.ts`), dynamic MCP tools (`tools/mcp-tool.ts`), config in `config/mcp.ts`, service in `services/mcp-client.ts`
 - **Phase 3**: Memory system — `models/MemoryTypes.ts`, `services/memory-service.ts`, `services/embedding-service.ts`, `services/vector-store.ts` (sqlite-vec), `tools/memory-query.ts`, `tools/memory-store.ts`. Needs `npm install sqlite-vec`
-- **Phase 4**: Voice — `helpers/stt.swift` (compile with swiftc), `services/voice-service.ts`, add `--voice` flag handling in `jarvis.ts`
-- **Phase 5**: Menu bar UI — Tauri v2 app, new `tauri/` and `ui/` directories
 - **Phase 6**: Scheduler — `services/scheduler.ts`, launchd plist, memory consolidation, self-assessment
 
 ## Implementation Process
@@ -27,15 +25,18 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 1. **Install new dependencies** if the phase requires them (check the plan)
 2. **Implement service files** first (the core logic)
 3. **Implement tool files** that use the services
-4. **Update `jarvis.ts`** to register new tools and initialize new services
+4. **Update BOTH entry points** — register new tools in `jarvis.ts` AND `jarvis-server.ts`
 5. **Update `config/`** if new configuration is needed
-6. **Test** by running `npx tsx jarvis.ts` and exercising the new capabilities
-7. **Update `README.md`** roadmap to mark the phase as complete
+6. **Test CLI**: Run `npx tsx jarvis.ts` and exercise the new capabilities
+7. **Test IPC**: Run `echo '{"id":"1","type":"query","text":"test the new tool"}' | npx tsx jarvis-server.ts` to verify server mode works
+8. **Build native app**: Run `cd JarvisApp && xcodebuild -scheme JarvisApp -configuration Debug build` to ensure no regressions
+9. **Update `README.md`** roadmap to mark the phase as complete
 
 ## Conventions
 
-- All imports use `.js` extension (ESM)
+- All TypeScript imports use `.js` extension (ESM)
 - Services export singleton instances
 - Tools implement `Tool` interface and never throw
 - Follow existing patterns in the codebase — read working code before writing new code
 - Keep stub TODO comments for sub-features not yet implemented within a phase
+- **Dual registration**: new tools go in both `jarvis.ts` and `jarvis-server.ts`
