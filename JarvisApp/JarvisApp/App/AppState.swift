@@ -65,6 +65,7 @@ final class AppState: ObservableObject {
     }
 
     func newConversation() {
+        logger.info("Starting new conversation")
         messages.removeAll()
         assistantState = .idle
         currentToolName = nil

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>507</string>
+	<key>AMApplicationVersion</key>
+	<string>2.3</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>AMMethodName</key>
+	<string>Run Shell Script</string>
+	<key>AMParameterClasses</key>
+	<array>
+		<string>AMServiceAction</string>
+		<string>AMShellScriptAction</string>
+		<string>AMApplication</string>
+	</array>
+	<key>AMParameterNames</key>
+	<array>
+		<string>serviceInputTypeIdentifier</string>
+		<string>shellScript</string>
+		<string>application</string>
+	</array>
+	<key>AMProvideNewContentTypes</key>
+	<false/>
+	<key>AMRequiredResources</key>
+	<array/>
+	<key>ASActionKOCoordinatorType</key>
+	<string>AMScriptAction</string>
+	<key>ActionUUID</key>
+	<string>D3F11D7E-615D-45B0-A778-B3081469CE57</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.Automator.RunShellScript</string>
+	<key>CFBundleVersion</key>
+	<string>2.0.3</string>
+	<key>CanProvideNewContentTypes</key>
+	<false/>
+	<key>ContainerUUID</key>
+	<string>9B28441A-939C-4E24-B4A0-74C9F144554A</string>
+	<key>Description</key>
+	<dict>
+		<key>AMDescription</key>
+		<string>Runs the shell script "Open in Cursor" with the selected folder.</string>
+	</dict>
+	<key>InputUUID</key>
+	<string>A2747998-8097-4231-B847-5500A750256E</string>
+	<key>LActionType</key>
+	<string>AMActionTypeProcess</string>
+	<key>OutputUUID</key>
+	<string>69107691-0A67-4971-B89E-771613378111</string>
+	<key>ParameterLevel</key>
+	<integer>2</integer>
+	<key>Parameters</key>
+	<dict>
+		<key>application</key>
+		<string>Finder</string>
+		<key>shellScript</key>
+		<string>for f in "$@"
+do
+  open -a Cursor "$f"
+done</string>
+		<key>serviceInputTypeIdentifier</key>
+		<string>com.apple.cocoa.path</string>
+	</dict>
+	<key>UUID</key>
+	<string>9B28441A-939C-4E24-B4A0-74C9F144554A</string>
+	<key>UnlocalizedApplications</key>
+	<array>
+		<string>Finder</string>
+	</array>
+	<key>arguments</key>
+	<array/>
+</dict>
+</plist>

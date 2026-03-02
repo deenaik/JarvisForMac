@@ -27,6 +27,8 @@ struct StatusMenuView: View {
 
             Button("New Conversation") {
                 appState.newConversation()
+                // Show the panel after clearing the conversation
+                NSApp.delegate.flatMap { $0 as? AppDelegate }?.showPanel()
             }
 
             Divider()

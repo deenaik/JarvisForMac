@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleGetInfoPList</key>
+	<string>true</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.example.open-in-cursor</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Open in Cursor</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.13</string>
+	<key>NSMainNibFile</key>
+	<string></string>
+	<key>NSPrincipalClass</key>
+	<string>AMWorkflowController</string>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>AMMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Open in Cursor</string>
+			</dict>
+			<key>AMServiceAttribute</key>
+			<string>NSMenuItem</string>
+			<key>AMServiceType</key>
+			<string>public.folder</string>
+			<key>NSMessage</key>
+			<string>runWorkflowAsService</string>
+			<key>NSPortName</key>
+			<string>AutomatorService</string>
+			<key>NSRequiredContext</key>
+			<array>
+				<dict>
+					<key>NSTargetName</key>
+					<string>Finder</string>
+					<key>NSSelectorName</key>
+					<string>reveal:</string>
+					<key>NSMenuItem</key>
+					<string>reveal</string>
+				</dict>
+			</array>
+			<key>NSSendTypes</key>
+			<array>
+				<string>public.folder</string>
+			</array>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.automator-workflow</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Open in Cursor</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.example.open-in-cursor</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>****</string>
+				<key>filename-extension</key>
+				<string>workflow</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

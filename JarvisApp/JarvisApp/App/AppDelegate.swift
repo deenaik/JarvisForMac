@@ -1,10 +1,12 @@
 import Cocoa
 import SwiftUI
+import os
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var panel: NSPanel?
     private var hotkeyManager: HotkeyManager?
+    private let logger = Logger(subsystem: "com.deenaik.JarvisApp", category: "AppDelegate")
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupPanel()
@@ -95,6 +97,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func showPanel() {
         guard let panel else { return }
+        logger.info("Showing panel")
         panel.alphaValue = 0
         panel.makeKeyAndOrderFront(nil)
         NSAnimationContext.runAnimationGroup { context in
@@ -107,6 +110,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func hidePanel() {
         guard let panel, panel.isVisible else { return }
+        logger.info("Hiding panel")
         NSAnimationContext.runAnimationGroup({ context in
             context.duration = 0.15
             context.timingFunction = CAMediaTimingFunction(name: .easeIn)
