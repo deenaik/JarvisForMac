@@ -17,32 +17,45 @@ final class NodeBridge: ObservableObject {
     /// Called for each IPC response from Node.js
     var onResponse: ((IPCResponse) -> Void)?
 
-    /// Path to the project root (parent of JarvisApp/)
+    /// Path to the project root (parent of JarvisApp/).
+    /// Resolution order:
+    ///   1. JARVIS_PROJECT_ROOT env var (explicit override)
+    ///   2. Xcode SOURCE_ROOT (set at build time via Info.plist, points to JarvisApp/ — parent is project root)
+    ///   3. Walk up from bundle path looking for jarvis-server.ts
+    ///   4. Hardcoded fallback for this workspace
     private var projectRoot: String {
-        // Walk up from the app bundle to find jarvis-server.ts
-        // In dev, the app is at JarvisApp/build/Debug/JarvisApp.app
-        // The project root is the repo root containing jarvis-server.ts
+        // 1. Explicit env override
         if let envPath = ProcessInfo.processInfo.environment["JARVIS_PROJECT_ROOT"] {
             return envPath
         }
 
-        // Try to find project root by looking for jarvis-server.ts relative to bundle
+        // 2. SOURCE_ROOT baked into Info.plist at build time (most reliable for Xcode builds)
+        if let sourceRoot = Bundle.main.infoDictionary?["ProjectSourceRoot"] as? String {
+            // sourceRoot points to JarvisApp/ (the Xcode project dir), parent is the repo root
+            let repoRoot = (sourceRoot as NSString).deletingLastPathComponent
+            let candidate = (repoRoot as NSString).appendingPathComponent("jarvis-server.ts")
+            if FileManager.default.fileExists(atPath: candidate) {
+                return repoRoot
+            }
+        }
+
+        // 3. Walk up from the app bundle to find jarvis-server.ts
         let bundle = Bundle.main.bundlePath
         var dir = (bundle as NSString).deletingLastPathComponent
-
-        // Walk up at most 5 levels to find jarvis-server.ts
-        for _ in 0..<5 {
+        for _ in 0..<10 {
             let candidate = (dir as NSString).appendingPathComponent("jarvis-server.ts")
             if FileManager.default.fileExists(atPath: candidate) {
                 return dir
             }
-            dir = (dir as NSString).deletingLastPathComponent
+            let parent = (dir as NSString).deletingLastPathComponent
+            if parent == dir { break } // hit filesystem root
+            dir = parent
         }
 
-        // Fallback: assume we're in the known workspace location
-        return (bundle as NSString)
-            .deletingLastPathComponent  // out of .app
-            .components(separatedBy: "/JarvisApp/").first ?? NSHomeDirectory()
+        // 4. Hardcoded fallback for this workspace
+        let fallback = NSHomeDirectory() + "/Workspace/Experiment/my-clone/JarvisForMac"
+        logger.warning("Could not resolve project root dynamically, using fallback: \(fallback)")
+        return fallback
     }
 
     func start() {

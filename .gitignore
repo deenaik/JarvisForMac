@@ -27,8 +27,43 @@ Thumbs.db
 .claude/*
 !.claude/skills/
 
-# Xcode
-JarvisApp/build/
-JarvisApp/DerivedData/
+# Xcode / Swift
+## Build products
+DerivedData/
+build/
+*.build/
+
+## User-specific Xcode data
 *.xcuserdata
-*.xcworkspace/xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+
+## Xcode workspace settings
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+## Index / logs
+IndexStores/
+*.ips
+*.xcactivitylog
+
+## Swift Package Manager (if used alongside Xcode)
+.swiftpm/
+Package.resolved
+.build/
+
+## Archives & exports
+*.xcarchive
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Code coverage
+*.gcda
+*.gcno
+codecov/
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
