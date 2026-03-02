@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+dist/
+data/
+
+# Build artifacts
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map
+!jest.config.js
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# IDEs
+.cursor/
+.vscode/
+
+# Claude Code (keep skills, ignore session data)
+.claude/*
+!.claude/skills/
