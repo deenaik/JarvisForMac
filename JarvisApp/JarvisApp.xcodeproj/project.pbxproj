@@ -23,6 +23,23 @@
 		A1000014 /* JarvisMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000014; };
 		A1000015 /* IPCProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000015; };
 		A1000016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1000016; };
+		A1000020 /* JarvisTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000020; };
+		A1000021 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000021; };
+		A1000022 /* DashboardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000022; };
+		A1000023 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000023; };
+		A1000024 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000024; };
+		A1000025 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000025; };
+		A1000026 /* DashboardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000026; };
+		A1000027 /* StatCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000027; };
+		A1000028 /* QuickActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000028; };
+		A1000029 /* WorkflowsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000029; };
+		A1000030 /* WorkflowCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000030; };
+		A1000031 /* ActivityContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000031; };
+		A1000032 /* TimelineEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000032; };
+		A1000033 /* LearningModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000033; };
+		A1000034 /* LearningContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000034; };
+		A1000035 /* SettingsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000035; };
+		A1000036 /* HelpContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000036; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +61,23 @@
 		B1000016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1000017 /* Jarvis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jarvis.entitlements; sourceTree = "<group>"; };
 		B1000018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1000020 /* JarvisTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarvisTheme.swift; sourceTree = "<group>"; };
+		B1000021 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		B1000022 /* DashboardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModels.swift; sourceTree = "<group>"; };
+		B1000023 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		B1000024 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		B1000025 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		B1000026 /* DashboardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContentView.swift; sourceTree = "<group>"; };
+		B1000027 /* StatCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCardView.swift; sourceTree = "<group>"; };
+		B1000028 /* QuickActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionsView.swift; sourceTree = "<group>"; };
+		B1000029 /* WorkflowsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowsContentView.swift; sourceTree = "<group>"; };
+		B1000030 /* WorkflowCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowCardView.swift; sourceTree = "<group>"; };
+		B1000031 /* ActivityContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityContentView.swift; sourceTree = "<group>"; };
+		B1000032 /* TimelineEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineEntryView.swift; sourceTree = "<group>"; };
+		B1000033 /* LearningModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModels.swift; sourceTree = "<group>"; };
+		B1000034 /* LearningContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningContentView.swift; sourceTree = "<group>"; };
+		B1000035 /* SettingsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContentView.swift; sourceTree = "<group>"; };
+		B1000036 /* HelpContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpContentView.swift; sourceTree = "<group>"; };
 		B1000099 /* JarvisApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JarvisApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -73,6 +107,7 @@
 				D1000004 /* Views */,
 				D1000005 /* Services */,
 				D1000006 /* Models */,
+				D1000009 /* Theme */,
 				D1000007 /* Resources */,
 				B1000018 /* Info.plist */,
 			);
@@ -98,6 +133,7 @@
 				B1000007 /* InputBarView.swift */,
 				B1000008 /* WaveformView.swift */,
 				B1000009 /* StatusMenuView.swift */,
+				D1000010 /* Dashboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -118,6 +154,9 @@
 			children = (
 				B1000014 /* JarvisMessage.swift */,
 				B1000015 /* IPCProtocol.swift */,
+				B1000022 /* DashboardModels.swift */,
+				B1000023 /* MockData.swift */,
+				B1000033 /* LearningModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,6 +168,34 @@
 				B1000017 /* Jarvis.entitlements */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D1000009 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B1000020 /* JarvisTheme.swift */,
+				B1000021 /* ColorExtensions.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		D1000010 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				B1000024 /* DashboardView.swift */,
+				B1000025 /* SidebarView.swift */,
+				B1000026 /* DashboardContentView.swift */,
+				B1000027 /* StatCardView.swift */,
+				B1000028 /* QuickActionsView.swift */,
+				B1000029 /* WorkflowsContentView.swift */,
+				B1000030 /* WorkflowCardView.swift */,
+				B1000031 /* ActivityContentView.swift */,
+				B1000032 /* TimelineEntryView.swift */,
+				B1000034 /* LearningContentView.swift */,
+				B1000035 /* SettingsContentView.swift */,
+				B1000036 /* HelpContentView.swift */,
+			);
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 		D1000008 /* Products */ = {
@@ -223,6 +290,23 @@
 				A1000013 /* HotkeyManager.swift in Sources */,
 				A1000014 /* JarvisMessage.swift in Sources */,
 				A1000015 /* IPCProtocol.swift in Sources */,
+				A1000020 /* JarvisTheme.swift in Sources */,
+				A1000021 /* ColorExtensions.swift in Sources */,
+				A1000022 /* DashboardModels.swift in Sources */,
+				A1000023 /* MockData.swift in Sources */,
+				A1000024 /* DashboardView.swift in Sources */,
+				A1000025 /* SidebarView.swift in Sources */,
+				A1000026 /* DashboardContentView.swift in Sources */,
+				A1000027 /* StatCardView.swift in Sources */,
+				A1000028 /* QuickActionsView.swift in Sources */,
+				A1000029 /* WorkflowsContentView.swift in Sources */,
+				A1000030 /* WorkflowCardView.swift in Sources */,
+				A1000031 /* ActivityContentView.swift in Sources */,
+				A1000032 /* TimelineEntryView.swift in Sources */,
+				A1000033 /* LearningModels.swift in Sources */,
+				A1000034 /* LearningContentView.swift in Sources */,
+				A1000035 /* SettingsContentView.swift in Sources */,
+				A1000036 /* HelpContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

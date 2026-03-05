@@ -18,6 +18,9 @@ final class AppState: ObservableObject {
     @Published var assistantState: AssistantState = .idle
     @Published var messages: [JarvisMessage] = []
     @Published var isPanelVisible = false
+    @Published var isDashboardVisible = false
+    @Published var requestShowDashboard = false
+    @Published var selectedTab: NavigationTab = .dashboard
     @Published var currentToolName: String?
 
     let nodeBridge = NodeBridge()

@@ -20,6 +20,11 @@ struct StatusMenuView: View {
 
             Divider()
 
+            Button("Show Dashboard") {
+                appState.requestShowDashboard = true
+            }
+            .keyboardShortcut("d", modifiers: [.command, .shift])
+
             Button("Show/Hide Panel") {
                 NSApp.delegate.flatMap { $0 as? AppDelegate }?.togglePanel()
             }

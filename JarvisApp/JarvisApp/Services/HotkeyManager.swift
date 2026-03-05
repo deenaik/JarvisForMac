@@ -1,16 +1,23 @@
 import Carbon
 import Cocoa
 
-/// Registers a global Cmd+Shift+J hotkey using the Carbon API.
+/// Registers global hotkeys using the Carbon API.
 final class HotkeyManager {
     private var hotkeyRef: EventHotKeyRef?
     private let handler: () -> Void
+    private let keyCode: UInt32
+    private let hotkeyId: UInt32
+    private let signature: String
 
-    // Store the handler in a static so the C callback can access it
-    private static var activeHandler: (() -> Void)?
+    // Store handlers indexed by hotkey ID so multiple instances work
+    private static var handlers: [UInt32: () -> Void] = [:]
+    private static var eventHandlerInstalled = false
 
-    init(handler: @escaping () -> Void) {
+    init(keyCode: UInt32 = UInt32(kVK_ANSI_J), hotkeyId: UInt32 = 1, signature: String = "JRVS", handler: @escaping () -> Void) {
         self.handler = handler
+        self.keyCode = keyCode
+        self.hotkeyId = hotkeyId
+        self.signature = signature
     }
 
     deinit {
@@ -18,28 +25,31 @@ final class HotkeyManager {
     }
 
     func register() {
-        HotkeyManager.activeHandler = handler
+        HotkeyManager.handlers[hotkeyId] = handler
 
-        // Cmd+Shift+J — 'J' keycode is 38
-        let hotkeyID = EventHotKeyID(signature: fourCharCode("JRVS"), id: 1)
+        if !HotkeyManager.eventHandlerInstalled {
+            var eventType = EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyPressed))
+            InstallEventHandler(
+                GetApplicationEventTarget(),
+                { _, event, _ -> OSStatus in
+                    var hotkeyID = EventHotKeyID()
+                    GetEventParameter(event, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout<EventHotKeyID>.size, nil, &hotkeyID)
+                    HotkeyManager.handlers[hotkeyID.id]?()
+                    return noErr
+                },
+                1,
+                &eventType,
+                nil,
+                nil
+            )
+            HotkeyManager.eventHandlerInstalled = true
+        }
+
+        let hotkeyID = EventHotKeyID(signature: fourCharCode(signature), id: hotkeyId)
         let modifiers: UInt32 = UInt32(cmdKey | shiftKey)
 
-        var eventType = EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyPressed))
-
-        InstallEventHandler(
-            GetApplicationEventTarget(),
-            { _, event, _ -> OSStatus in
-                HotkeyManager.activeHandler?()
-                return noErr
-            },
-            1,
-            &eventType,
-            nil,
-            nil
-        )
-
         let status = RegisterEventHotKey(
-            UInt32(kVK_ANSI_J),
+            keyCode,
             modifiers,
             hotkeyID,
             GetApplicationEventTarget(),
@@ -48,7 +58,7 @@ final class HotkeyManager {
         )
 
         if status != noErr {
-            NSLog("Failed to register hotkey: \(status)")
+            NSLog("Failed to register hotkey (id=\(hotkeyId)): \(status)")
         }
     }
 
@@ -57,7 +67,7 @@ final class HotkeyManager {
             UnregisterEventHotKey(ref)
             hotkeyRef = nil
         }
-        HotkeyManager.activeHandler = nil
+        HotkeyManager.handlers.removeValue(forKey: hotkeyId)
     }
 
     private func fourCharCode(_ string: String) -> FourCharCode {
